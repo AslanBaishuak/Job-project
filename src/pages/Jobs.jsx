@@ -1,20 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const Jobs = () => {
+  const [jobList, setJobList] = useState([]);
+
+  useEffect(() => {
+    const savedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
+    setJobList(savedJobs);
+  }, []);
+
+  const deleteJob = (id) => {
+    const updatedJobs = jobList.filter((job) => job.id !== id);
+    
+    setJobList(updatedJobs);
+    
+    localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+  };
+
   return (
-    <div>
-      <h2>Jobs</h2>
-
-      <input placeholder="Search job..." />
-
-      <div>
-        <h3>Frontend Developer</h3>
-        <p>Google</p>
-        <Link to="/jobs/1">View</Link>
-      </div>
+    <div style={{ padding: "20px" }}>
+      <h1>Available Jobs</h1>
+      {jobList.length === 0 ? (
+        <p>No jobs posted yet.</p>
+      ) : (
+        jobList.map((job) => (
+          <div key={job.id} style={{ border: "1px solid #ddd", padding: "15px", margin: "10px 0", borderRadius: "8px" }}>
+            <Link to={`/jobs/${job.id}`}>
+              <h3 style={{ color: "blue", textDecoration: "underline" }}>{job.title}</h3>
+            </Link>
+            <p><strong>Company:</strong> {job.company}</p>
+            <p>{job.description}</p>
+            
+            <button 
+              onClick={() => deleteJob(job.id)}
+              style={{ backgroundColor: "#ff4d4d", color: "white", border: "none", padding: "5px 10px", cursor: "pointer", borderRadius: "4px" }}
+            >
+              Delete Job
+            </button>
+          </div>
+        ))
+      )}
     </div>
   );
-}
+};
 
 export default Jobs;

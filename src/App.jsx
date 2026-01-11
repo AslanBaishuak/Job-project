@@ -8,10 +8,13 @@ import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import Favorites from "./pages/Favorites";
 import CompanyJobs from "./pages/CompanyJobs";
+import Navbar from "./components/NavBar";
+
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
