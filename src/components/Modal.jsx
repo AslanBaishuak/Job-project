@@ -39,14 +39,13 @@ const overlayStyle = {
 
 const modalStyle = {
   backgroundColor: "white",
-  padding: "20px",
+  padding: "30px", 
   borderRadius: "8px",
-  maxWidth: "500px",
-  width: "90%",
-  maxHeight: "80vh",
+  maxWidth: "800px", 
+  width: "95%",     
+  maxHeight: "85vh", 
   overflowY: "auto",
 };
-
 const closeBtnStyle = {
   background: "none",
   border: "none",
