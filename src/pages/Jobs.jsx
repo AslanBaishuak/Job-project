@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
   const [jobList, setJobList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     const savedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
@@ -22,18 +23,41 @@ const Jobs = () => {
     const Favorites = jobList.find((job) => job.id === id);
 
     const favoriteJobs = JSON.parse(localStorage.getItem("favoriteJobs")) || [];
-    favoriteJobs.push(Favorites);
-    localStorage.setItem("favoriteJobs", JSON.stringify(favoriteJobs));
+    if (!favoriteJobs.find(fav => fav.id === id)) {
+        favoriteJobs.push(Favorites);
+        localStorage.setItem("favoriteJobs", JSON.stringify(favoriteJobs));
+    }
     navigate("/favorites");
   };
+
+  const filteredJobs = jobList.filter((job) =>
+    job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    job.company.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>Available Jobs</h1>
-      {jobList.length === 0 ? (
+
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          placeholder="Search by job title or company..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px",
+            fontSize: "16px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
+        />
+      </div>
+      {filteredJobs.length === 0 ? (
         <p>No jobs posted yet.</p>
       ) : (
-        jobList.map((job) => (
+        filteredJobs.map((job) => (
           <div
             key={job.id}
             style={{

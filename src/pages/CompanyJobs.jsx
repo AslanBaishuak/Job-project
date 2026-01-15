@@ -42,42 +42,54 @@ const CompanyJobs = () => {
       <h2>My Company Jobs</h2>
 
       <div>
-        {JSON.parse(localStorage.getItem("jobs"))?.map((job) => (
-          <div
-            key={job.id}
-            style={{
-              border: "1px solid #ddd",
-              padding: "15px",
-              margin: "10px 0",
-              borderRadius: "8px",
-            }}
-          >
-            <h3>{job.title}</h3>
-            <p>
-              <strong>Company:</strong> {job.company}
-            </p>
-            <p>{job.description}</p>
-            <button
-              onClick={() => handleEditClick(job)}
-              style={{ marginRight: "10px" }}
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => DeleteJob(job.id)}
+        {jobList.length === 0 ? (
+          <p>No jobs posted yet.</p>
+        ) : ( 
+          jobList.map((job) => (
+            <div
+              key={job.id}
               style={{
-                backgroundColor: "#ff4d4d",
-                color: "white",
-                border: "none",
-                padding: "5px 10px",
-                cursor: "pointer",
-                borderRadius: "4px",
+                border: "1px solid #ddd",
+                padding: "15px",
+                margin: "10px 0",
+                borderRadius: "8px",
               }}
             >
-              Delete a job
-            </button>
-          </div>
-        )) || <p>No jobs posted by your company yet.</p>}
+              <h3>{job.title}</h3>
+              <p>
+                <strong>Company:</strong> {job.company}
+              </p>
+              <p>{job.description}</p>
+              <button
+                onClick={() => handleEditClick(job)}
+                style={{
+                  backgroundColor: "#4CAF50",
+                  color: "white",
+                  border: "none",
+                  padding: "8px 12px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  marginRight: "10px",
+                }}
+              >
+                Edit Job
+              </button>
+              <button
+                onClick={() => DeleteJob(job.id)}
+                style={{
+                  backgroundColor: "#ff4d4d",
+                  color: "white",
+                  border: "none",
+                  padding: "8px 12px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                Delete Job
+              </button>
+            </div>
+          ))
+        )}
       </div>
 
       <Modal

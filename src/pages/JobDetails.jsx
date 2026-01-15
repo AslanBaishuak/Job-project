@@ -26,7 +26,7 @@ const JobDetails = () => {
         <h4>Job Description</h4>
         <p>{job.description}</p>
       </div>
-    </div>
+    </div>  
   );
 };
 
