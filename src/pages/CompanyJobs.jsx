@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../components/Modal";
+import "./CompanyJobs.css";
 
 const CompanyJobs = () => {
   const [jobList, setJobList] = useState([]);
@@ -32,61 +33,43 @@ const CompanyJobs = () => {
   };
 
   const DeleteJob = (id) => {
-    const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    const updatedJobs = jobs.filter((job) => job.id !== id);
+    const updatedJobs = jobList.filter((job) => job.id !== id);
     localStorage.setItem("jobs", JSON.stringify(updatedJobs));
-    window.location.reload();
+    setJobList(updatedJobs);
   };
+
   return (
-    <div>
+    <div className="company-jobs-container">
       <h2>My Company Jobs</h2>
 
       <div>
         {jobList.length === 0 ? (
-          <p>No jobs posted yet.</p>
-        ) : ( 
+          <p style={{ textAlign: "center", color: "#888" }}>
+            No jobs posted yet.
+          </p>
+        ) : (
           jobList.map((job) => (
-            <div
-              key={job.id}
-              style={{
-                border: "1px solid #ddd",
-                padding: "15px",
-                margin: "10px 0",
-                borderRadius: "8px",
-              }}
-            >
+            <div key={job.id} className="company-job-card">
               <h3>{job.title}</h3>
               <p>
                 <strong>Company:</strong> {job.company}
               </p>
               <p>{job.description}</p>
-              <button
-                onClick={() => handleEditClick(job)}
-                style={{
-                  backgroundColor: "#4CAF50",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 12px",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  marginRight: "10px",
-                }}
-              >
-                Edit Job
-              </button>
-              <button
-                onClick={() => DeleteJob(job.id)}
-                style={{
-                  backgroundColor: "#ff4d4d",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 12px",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                }}
-              >
-                Delete Job
-              </button>
+
+              <div className="company-button-group">
+                <button
+                  className="btn-edit"
+                  onClick={() => handleEditClick(job)}
+                >
+                  Edit Job
+                </button>
+                <button
+                  className="btn-delete"
+                  onClick={() => DeleteJob(job.id)}
+                >
+                  Delete Job
+                </button>
+              </div>
             </div>
           ))
         )}
@@ -97,7 +80,7 @@ const CompanyJobs = () => {
         onClose={() => setIsModalOpen(false)}
         title="Edit Job Posting"
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div className="modal-form">
           <input
             value={editingJob.title}
             onChange={(e) =>
@@ -120,16 +103,7 @@ const CompanyJobs = () => {
             placeholder="Description"
             rows="5"
           />
-          <button
-            onClick={handleSaveEdit}
-            style={{
-              backgroundColor: "#4CAF50",
-              color: "white",
-              padding: "10px",
-              border: "none",
-              borderRadius: "4px",
-            }}
-          >
+          <button className="btn-save" onClick={handleSaveEdit}>
             Save Changes
           </button>
         </div>

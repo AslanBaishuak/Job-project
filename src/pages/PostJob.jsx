@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./PostJob.css"; // Import the CSS file
 
 const PostJob = () => {
   const [title, setTitle] = useState("");
@@ -27,32 +28,32 @@ const PostJob = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
-        maxWidth: "300px",
-        margin: "20px",
-      }}
-    >
-      <h2>Post a Job</h2>
-      <input
-        placeholder="Job Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        placeholder="Company"
-        value={company}
-        onChange={(e) => setCompany(e.target.value)}
-      />
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button onClick={handleSubmit}>Publish Job</button>
+    <div className="post-job-wrapper">
+      <div className="post-job-card">
+        <h2>Post a Job</h2>
+
+        <input
+          placeholder="Job Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+        />
+
+        <input
+          placeholder="Company"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          type="text"
+        />
+
+        <textarea
+          placeholder="Job Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <button onClick={handleSubmit}>Publish Job</button>
+      </div>
     </div>
   );
 };

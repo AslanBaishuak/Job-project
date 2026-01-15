@@ -1,19 +1,23 @@
 import React from "react";
+import "./Register.css";
 
 const Register = () => {
-    return (
-    <div>
-      <h2>Register</h2>
-      <input placeholder="Name" />
-      <input placeholder="Email" />
-      <input placeholder="Password" type="password" />
+  return (
+    <div className="register-wrapper">
+      <div className="register-card">
+        <h2>Register</h2>
+        <input placeholder="Name" type="text" />
+        <input placeholder="Email" type="email" />
+        <input placeholder="Password" type="password" />
 
-      <select>
-        <option>Job Seeker</option>
-        <option>Employer</option>
-      </select>
+        <select>
+          <option value="" disabled selected>Select Role</option>
+          <option value="seeker">Job Seeker</option>
+          <option value="employer">Employer</option>
+        </select>
 
-      <button>Register</button>
+        <button type="submit">Register</button>
+      </div>
     </div>
   );
 }

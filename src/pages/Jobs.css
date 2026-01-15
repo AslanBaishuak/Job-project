@@ -1,0 +1,97 @@
+
+.jobs-container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.jobs-container h1 {
+  margin-bottom: 30px;
+  text-align: center;
+  color: #222;
+}
+
+.search-section {
+  margin-bottom: 30px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.job-card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.job-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.job-link h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+
+.job-link h3:hover {
+  text-decoration: underline;
+}
+
+.job-card p {
+  margin: 8px 0;
+  line-height: 1.5;
+  color: #555;
+}
+
+
+.button-group {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-favorite {
+  background-color: #eb57bf;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-favorite:hover {
+  opacity: 0.85;
+}
+.no-jobs {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  margin-top: 50px;
+}
