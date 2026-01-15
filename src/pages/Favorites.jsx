@@ -1,45 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "./Favorites.css"; 
 
 const Favorites = () => {
-  const DeleteFavorite = (id) => {
-    const favoriteJobs = JSON.parse(localStorage.getItem("favoriteJobs")) || [];
-    const updatedFavorites = favoriteJobs.filter((job) => job.id !== id);
-    localStorage.setItem("favoriteJobs", JSON.stringify(updatedFavorites));
-    window.location.reload();
-  };
-  return (
-    <div>
-      <h2>Favorite Jobs</h2>
+  const [favoriteJobs, setFavoriteJobs] = useState([]);
 
-      <div>
-        {JSON.parse(localStorage.getItem("favoriteJobs"))?.length === 0 ? (
-          <p>No favorite jobs added yet.</p>
+  useEffect(() => {
+    const savedJobs = JSON.parse(localStorage.getItem("favoriteJobs")) || [];
+    setFavoriteJobs(savedJobs);
+  }, []);
+
+  const deleteFavorite = (id) => {
+    const updatedFavorites = favoriteJobs.filter((job) => job.id !== id);
+    
+    setFavoriteJobs(updatedFavorites);
+  
+    localStorage.setItem("favoriteJobs", JSON.stringify(updatedFavorites));
+  };
+
+  return (
+    <div className="favorites-container">
+      <h2 className="favorites-title">Favorite Jobs</h2>
+
+      <div className="jobs-list">
+        {favoriteJobs.length === 0 ? (
+          <p className="no-favorites">No favorite jobs added yet.</p>
         ) : (
-          JSON.parse(localStorage.getItem("favoriteJobs"))?.map((job) => (
-            <div
-              key={job.id}
-              style={{
-                border: "1px solid #ddd",
-                padding: "15px",
-                margin: "10px 0",
-                borderRadius: "8px",
-              }}
-            >
+          favoriteJobs.map((job) => (
+            <div key={job.id} className="job-card">
               <h3>{job.title}</h3>
-              <p>
-                <strong>Company:</strong> {job.company}
+              <p className="company-name">
+                Company: {job.company}
               </p>
-              <p>{job.description}</p>
+              <p className="job-description">{job.description}</p>
               <button
-                onClick={() => DeleteFavorite(job.id)}
-                style={{
-                  backgroundColor: "#ff4d4d",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 12px",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                }}
+                className="delete-btn"
+                onClick={() => deleteFavorite(job.id)}
               >
                 Remove from Favorites
               </button>

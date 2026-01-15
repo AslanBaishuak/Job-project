@@ -1,0 +1,78 @@
+.favorites-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.favorites-title {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.no-favorites {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 50px;
+}
+
+.job-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.job-card h3 {
+  margin: 0 0 10px 0;
+  color: #0073b1; /* Professional blue */
+}
+
+.company-name {
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.job-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.delete-btn {
+  background-color: #d93041; 
+  color: white;
+  
+  border: none;
+  font-weight: 700;
+  
+  padding: 10px 24px;
+  border-radius: 8px;
+  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #b92635;
+}
+
+.delete-btn:active {
+  transform: scale(0.98);
+}

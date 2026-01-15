@@ -81,31 +81,45 @@ const CompanyJobs = () => {
         title="Edit Job Posting"
       >
         <div className="modal-form">
-          <input
-            value={editingJob.title}
-            onChange={(e) =>
-              setEditingJob({ ...editingJob, title: e.target.value })
-            }
-            placeholder="Title"
-          />
-          <input
-            value={editingJob.company}
-            onChange={(e) =>
-              setEditingJob({ ...editingJob, company: e.target.value })
-            }
-            placeholder="Company"
-          />
-          <textarea
-            value={editingJob.description}
-            onChange={(e) =>
-              setEditingJob({ ...editingJob, description: e.target.value })
-            }
-            placeholder="Description"
-            rows="5"
-          />
-          <button className="btn-save" onClick={handleSaveEdit}>
-            Save Changes
-          </button>
+          <div className="form-group">
+            <label>Job Title</label>
+            <input
+              value={editingJob.title}
+              onChange={(e) =>
+                setEditingJob({ ...editingJob, title: e.target.value })
+              }
+              placeholder="e.g. Senior Frontend Developer"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Company Name</label>
+            <input
+              value={editingJob.company}
+              onChange={(e) =>
+                setEditingJob({ ...editingJob, company: e.target.value })
+              }
+              placeholder="Company Name"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              value={editingJob.description}
+              onChange={(e) =>
+                setEditingJob({ ...editingJob, description: e.target.value })
+              }
+              placeholder="Job description..."
+              rows="6"
+            />
+          </div>
+
+          <div className="modal-actions">
+            <button className="btn-save" onClick={handleSaveEdit}>
+              Save Changes
+            </button>
+          </div>
         </div>
       </Modal>
     </div>

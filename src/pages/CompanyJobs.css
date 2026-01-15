@@ -11,7 +11,7 @@
   color: #333;
 }
 
-/* Job Card Styling */
+
 .company-job-card {
   background: #fff;
   border: 1px solid #ddd;
@@ -31,7 +31,7 @@
   line-height: 1.5;
 }
 
-/* Button Group */
+
 .company-button-group {
   margin-top: 15px;
   display: flex;
@@ -68,15 +68,13 @@
   opacity: 0.85;
 }
 
-/* Modal Form Styling */
-/* Container for the form inside the modal */
+
 .modal-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Styling the input fields and textarea */
 .modal-form input,
 .modal-form textarea {
   width: 100%;
@@ -85,11 +83,11 @@
   border-radius: 6px;
   font-size: 16px;
   font-family: inherit;
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  box-sizing: border-box; 
 }
 
 .modal-form textarea {
-  resize: vertical; /* Allows users to resize height but not width */
+  resize: vertical;
 }
 
 .modal-form input:focus,
@@ -99,7 +97,7 @@
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-/* The Save Button */
+
 .btn-save {
   background-color: #28a745;
   color: white;
@@ -116,7 +114,7 @@
   background-color: #218838;
 }
 
-/* Styling for the Edit and Delete buttons in the list */
+
 .company-button-group {
   display: flex;
   gap: 10px;

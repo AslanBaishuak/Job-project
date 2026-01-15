@@ -1,0 +1,67 @@
+.job-details-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.back-button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+  border-color: #bbb;
+  color: #000;
+}
+
+.job-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  border: 1px solid #eaeaea;
+}
+
+.job-title {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  color: #1a1a1a;
+}
+
+.company-name {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.description-section {
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.description-section h4 {
+  margin-top: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+.description-text {
+  line-height: 1.6;
+  color: #444;
+  white-space: pre-line; /* Preserves line breaks from your input */
+}

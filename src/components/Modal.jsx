@@ -10,10 +10,11 @@ const Modal = ({ isOpen, onClose, title, children }) => {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginBottom: "15px",
+            alignItems: "center",
+            marginBottom: "20px",
           }}
         >
-          <h2>{title}</h2>
+          <h2 style={{ margin: 0 }}>{title}</h2>
           <button onClick={onClose} style={closeBtnStyle}>
             &times;
           </button>
@@ -39,18 +40,21 @@ const overlayStyle = {
 
 const modalStyle = {
   backgroundColor: "white",
-  padding: "30px", 
-  borderRadius: "8px",
-  maxWidth: "800px", 
-  width: "95%",     
-  maxHeight: "85vh", 
+  padding: "30px",
+  borderRadius: "12px",
+  maxWidth: "800px", // Increased width
+  width: "90%",
+  maxHeight: "85vh",
   overflowY: "auto",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
 };
+
 const closeBtnStyle = {
   background: "none",
   border: "none",
-  fontSize: "24px",
+  fontSize: "28px",
   cursor: "pointer",
+  lineHeight: "1",
 };
 
 export default Modal;
