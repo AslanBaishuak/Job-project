@@ -63,5 +63,5 @@
 .description-text {
   line-height: 1.6;
   color: #444;
-  white-space: pre-line; /* Preserves line breaks from your input */
+  white-space: pre-line; 
 }
