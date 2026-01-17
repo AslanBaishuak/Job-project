@@ -1,0 +1,41 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Software Engineer",
+      "description": "Develop and maintain software applications.",
+      "location": "New York, NY",
+      "type": "Full-time"
+    },
+    {
+      "id": 2,
+      "title": "Data Scientist",
+      "description": "Analyze and interpret complex data to help companies make decisions.",
+      "location": "San Francisco, CA",
+      "type": "Full-time"
+    },
+    {
+      "id": 3,
+      "title": "Product Manager",
+      "description": "Oversee the development and delivery of products.",
+      "location": "Remote",
+      "type": "Contract"
+    }
+  ],
+  "users": [
+    {
+      "email": "asasas@hjsahjs.com",
+      "password": "$2a$10$lmrI7uJRbGewFAYQNgudxu93ZAj9qa5IyF6CR6RhuAjiCgHKVlC.O",
+      "name": "sdlskjdlsk",
+      "role": "seeker",
+      "id": 1
+    },
+    {
+      "email": "dasdladjal@jkhjih.ksla",
+      "password": "$2a$10$ggFdFazo/B5ya5emC1WyJeWVfcdVkVPXQezOtpKiz9qwNwdPYUcxG",
+      "name": "sasa",
+      "role": "seeker",
+      "id": 2
+    }
+  ]
+}
