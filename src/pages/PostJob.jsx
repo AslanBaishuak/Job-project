@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./PostJob.css"; // Import the CSS file
+import { createJob } from "../services/jobsService";
+import "./PostJob.css"; 
 
 const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    if (!title || !company)
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+
+    if (!title || !company) {
       return alert("Please fill in the title and company");
+    }
 
     const newJob = {
       id: Date.now(),
@@ -20,16 +25,23 @@ const PostJob = () => {
       description,
     };
 
-    const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    jobs.push(newJob);
-    localStorage.setItem("jobs", JSON.stringify(jobs));
-
-    navigate("/jobs");
+    try {
+      setIsSubmitting(true);
+      
+      await createJob(newJob); 
+      
+      navigate("/jobs"); 
+    } catch (error) {
+      console.error("Failed to create job:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="post-job-wrapper">
-      <div className="post-job-card">
+      <form className="post-job-card" onSubmit={handleSubmit}>
         <h2>Post a Job</h2>
 
         <input
@@ -37,6 +49,7 @@ const PostJob = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           type="text"
+          required
         />
 
         <input
@@ -44,6 +57,7 @@ const PostJob = () => {
           value={company}
           onChange={(e) => setCompany(e.target.value)}
           type="text"
+          required
         />
 
         <textarea
@@ -52,8 +66,10 @@ const PostJob = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button onClick={handleSubmit}>Publish Job</button>
-      </div>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Publishing..." : "Publish Job"}
+        </button>
+      </form>
     </div>
   );
 };

@@ -12,17 +12,20 @@ import Navbar from "./components/NavBar";
 
 
 export default function App() {
+
+  const  authorized= Boolean(localStorage.getItem("token"));
   return (
     <BrowserRouter>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/post-job" element={<PostJob />} />
+        {!authorized && <Route path="/login" element={<Login />} />}
+        {!authorized && <Route path="/register" element={<Register />} />}
+        {authorized && <Route path="/post-job" element={<PostJob />} />}
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/jobs/:id" element={<JobDetails />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="*" element={<h1>404</h1>}/>
         <Route path="/company-jobs" element={<CompanyJobs />} />
       </Routes>
     </BrowserRouter>

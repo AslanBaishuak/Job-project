@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../components/Modal";
+import { getJobs, deleteJob, updateJob } from "../services/jobsService";
 import "./CompanyJobs.css";
 
 const CompanyJobs = () => {
@@ -13,8 +14,15 @@ const CompanyJobs = () => {
   });
 
   useEffect(() => {
-    const savedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    setJobList(savedJobs);
+    const fetchCompanyJobs = async () => {
+      try {
+        const jobs = await getJobs();
+        setJobList(jobs);
+      } catch (err) {
+        console.error("Failed to fetch company jobs:", err);
+      }
+    };
+    fetchCompanyJobs();
   }, []);
 
   const handleEditClick = (job) => {
@@ -22,38 +30,48 @@ const CompanyJobs = () => {
     setIsModalOpen(true);
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
+    // 1. Create the updated list
     const updatedJobs = jobList.map((job) =>
       job.id === editingJob.id ? editingJob : job
     );
 
-    localStorage.setItem("jobs", JSON.stringify(updatedJobs));
-    setJobList(updatedJobs);
-    setIsModalOpen(false);
+    try {
+      await updateJob(editingJob); 
+      
+      setJobList(updatedJobs);
+
+      localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+      
+      setIsModalOpen(false);
+    } catch (err) {
+      console.error("Failed to save job edits:", err);
+    }
   };
 
-  const DeleteJob = (id) => {
+  const handleDeleteJob = async (id) => {
     const updatedJobs = jobList.filter((job) => job.id !== id);
-    localStorage.setItem("jobs", JSON.stringify(updatedJobs));
-    setJobList(updatedJobs);
+    try {
+      await deleteJob(id);
+      setJobList(updatedJobs);
+      localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+    } catch (err) {
+      console.error("Failed to delete job:", err);
+    }
   };
 
   return (
     <div className="company-jobs-container">
       <h2>My Company Jobs</h2>
 
-      <div>
+      <div className="job-list">
         {jobList.length === 0 ? (
-          <p style={{ textAlign: "center", color: "#888" }}>
-            No jobs posted yet.
-          </p>
+          <p className="no-jobs-text">No jobs posted yet.</p>
         ) : (
           jobList.map((job) => (
             <div key={job.id} className="company-job-card">
               <h3>{job.title}</h3>
-              <p>
-                <strong>Company:</strong> {job.company}
-              </p>
+              <p><strong>Company:</strong> {job.company}</p>
               <p>{job.description}</p>
 
               <div className="company-button-group">
@@ -65,7 +83,7 @@ const CompanyJobs = () => {
                 </button>
                 <button
                   className="btn-delete"
-                  onClick={() => DeleteJob(job.id)}
+                  onClick={() => handleDeleteJob(job.id)}
                 >
                   Delete Job
                 </button>

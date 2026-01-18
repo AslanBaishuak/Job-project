@@ -1,34 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { getJobs } from "../services/jobsService"; 
+import { addFavorite } from "../services/favoritesService";
 import "./Jobs.css";
 
 const Jobs = () => {
   const [jobList, setJobList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const savedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    setJobList(savedJobs);
+    const fetchJobs = async () => {
+      try {
+        setIsLoading(true);
+        const jobs = await getJobs();
+        setJobList(jobs);
+      } catch (err) {
+        setError("Could not load jobs. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchJobs();
   }, []);
 
-
-  const favoriteJob = (id) => {
-    const Favorite = jobList.find((job) => job.id === id);
-    const favoriteJobs = JSON.parse(localStorage.getItem("favoriteJobs")) || [];
-
-    if (!favoriteJobs.find((fav) => fav.id === id)) {
-      favoriteJobs.push(Favorite);
-      localStorage.setItem("favoriteJobs", JSON.stringify(favoriteJobs));
+  const favoriteJob = async (job) => {
+    try {
+      await addFavorite(job);
+      alert("Job added to favorites!");
+    } catch (err) {
+      alert("Failed to add job to favorites. Please try again.");
     }
-    navigate("/favorites");
   };
 
-  const filteredJobs = jobList.filter(
-    (job) =>
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredJobs = useMemo(() => {
+    return jobList.filter(
+      (job) =>
+        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.company.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, jobList]);
+
+  if (isLoading) return <div className="loader">Loading jobs...</div>;
+  if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="jobs-container">
@@ -45,7 +60,7 @@ const Jobs = () => {
       </div>
 
       {filteredJobs.length === 0 ? (
-        <p className="no-jobs">No jobs posted yet.</p>
+        <p className="no-jobs">No jobs found matching your search.</p>
       ) : (
         filteredJobs.map((job) => (
           <div key={job.id} className="job-card">
@@ -53,15 +68,13 @@ const Jobs = () => {
               <h3>{job.title}</h3>
             </Link>
 
-            <p>
-              <strong>Company:</strong> {job.company}
-            </p>
+            <p><strong>Company:</strong> {job.company}</p>
             <p>{job.description}</p>
 
             <div className="button-group">
               <button
                 className="btn-favorite"
-                onClick={() => favoriteJob(job.id)}
+                onClick={() => favoriteJob(job)}
               >
                 Add to Favorites
               </button>

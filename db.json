@@ -1,25 +1,16 @@
 {
   "jobs": [
     {
-      "id": 1,
-      "title": "Software Engineer",
-      "description": "Develop and maintain software applications.",
-      "location": "New York, NY",
-      "type": "Full-time"
+      "id": 1768725436339,
+      "title": "sa;slas",
+      "company": "sa;lsaksa",
+      "description": "sal;sas"
     },
     {
-      "id": 2,
-      "title": "Data Scientist",
-      "description": "Analyze and interpret complex data to help companies make decisions.",
-      "location": "San Francisco, CA",
-      "type": "Full-time"
-    },
-    {
-      "id": 3,
-      "title": "Product Manager",
-      "description": "Oversee the development and delivery of products.",
-      "location": "Remote",
-      "type": "Contract"
+      "id": 1768725649446,
+      "title": "sssas",
+      "company": "sasasa",
+      "description": "asasas"
     }
   ],
   "users": [
@@ -36,6 +27,49 @@
       "name": "sasa",
       "role": "seeker",
       "id": 2
+    },
+    {
+      "email": "Aslan@gmail.com",
+      "password": "$2a$10$QJre7yoZWnhoiYuNvEeJMeVCBep2Y3x7JoI7UdND/FJxGf9ceAl02",
+      "name": "Aslan",
+      "role": "employer",
+      "id": 3
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "$2a$10$/yTBSXM2xDFI2.U3.oCc5upM7kTSMZq17R7kWb/knBK4YfDSlwK2S",
+      "name": "Aslan",
+      "role": "seeker",
+      "id": 4
+    },
+    {
+      "email": "a1@gmail.com",
+      "password": "$2a$10$NgdjFoqFNmGfrwjRou.5Hec32Y0um88EsXk8ta3bJUL/XO6jsI3xe",
+      "name": "Aslan",
+      "role": "seeker",
+      "id": 5
+    },
+    {
+      "email": "asas@isjoa.csfd",
+      "password": "$2a$10$r6R647l/vnebn1F0G7qtDeRoxpurs3Mp0K1LxhVtDEs8BLt7g7E8a",
+      "name": "sasa",
+      "role": "employer",
+      "id": 6
+    },
+    {
+      "email": "b@gmail.com",
+      "password": "$2a$10$Fwl1V8rgexJnnlc/xqzHZOyUwOAsLTn2M3pNtt7i/ygCgoXHlBMjS",
+      "name": "qswqw",
+      "role": "seeker",
+      "id": 7
+    },
+    {
+      "email": "c@gmail.com",
+      "password": "$2a$10$aDjR/qtnddHr1GArg.wr4.yaIqnA9Y8LXwigZJKZX0CeZ6W1L7cxy",
+      "name": "olasjaos",
+      "role": "employer",
+      "id": 8
     }
-  ]
+  ],
+  "favorites": []
 }

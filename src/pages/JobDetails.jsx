@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getJobById} from "../services/jobsService";
 import "./JobDetails.css"; 
 
 const JobDetails = () => {
@@ -8,9 +9,16 @@ const JobDetails = () => {
   const [job, setJob] = useState(null);
 
   useEffect(() => {
-    const savedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    const foundJob = savedJobs.find((j) => String(j.id) === String(id));
-    setJob(foundJob);
+  const fetchJob = async () => {
+    try {
+      const jobData = await getJobById(id);
+        setJob(jobData);
+      } catch (error) {
+        console.error("Failed to fetch job details:", error);
+      }
+    };
+
+    fetchJob();
   }, [id]);
 
   if (!job) return <p className="error-message">Job not found!</p>;

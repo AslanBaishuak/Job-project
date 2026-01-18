@@ -10,14 +10,9 @@ const Register = () => {
   const [error, setError] = useState(""); 
 
   const validateForm = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name.trim()) {
       setError("Name is required.");
-      return false;
-    }
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address.");
       return false;
     }
     if (password.length < 5) {
