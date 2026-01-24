@@ -6,11 +6,15 @@ import "./CompanyJobs.css";
 const CompanyJobs = () => {
   const [jobList, setJobList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [editingJob, setEditingJob] = useState({
     id: "",
     title: "",
     company: "",
     description: "",
+    location: "",
+    jobType: "Full-time",
+    salary: "",
   });
 
   useEffect(() => {
@@ -26,30 +30,29 @@ const CompanyJobs = () => {
   }, []);
 
   const handleEditClick = (job) => {
-    setEditingJob(job);
+    setEditingJob({ ...job });
     setIsModalOpen(true);
   };
 
   const handleSaveEdit = async () => {
-    // 1. Create the updated list
     const updatedJobs = jobList.map((job) =>
       job.id === editingJob.id ? editingJob : job
     );
 
     try {
       await updateJob(editingJob); 
-      
       setJobList(updatedJobs);
-
       localStorage.setItem("jobs", JSON.stringify(updatedJobs));
-      
       setIsModalOpen(false);
     } catch (err) {
       console.error("Failed to save job edits:", err);
+      alert("Error saving changes.");
     }
   };
 
   const handleDeleteJob = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this posting?")) return;
+    
     const updatedJobs = jobList.filter((job) => job.id !== id);
     try {
       await deleteJob(id);
@@ -70,22 +73,21 @@ const CompanyJobs = () => {
         ) : (
           jobList.map((job) => (
             <div key={job.id} className="company-job-card">
+              <div className="card-header">
+                <span className="job-tag">{job.jobType}</span>
+                <span className="salary-text">{job.salary}</span>
+              </div>
+              
               <h3>{job.title}</h3>
-              <p><strong>Company:</strong> {job.company}</p>
-              <p>{job.description}</p>
+              <p className="location-info">📍 {job.location || "No location set"}</p>
+              <p className="description-snippet">{job.description}</p>
 
               <div className="company-button-group">
-                <button
-                  className="btn-edit"
-                  onClick={() => handleEditClick(job)}
-                >
-                  Edit Job
+                <button className="btn-edit" onClick={() => handleEditClick(job)}>
+                  Edit
                 </button>
-                <button
-                  className="btn-delete"
-                  onClick={() => handleDeleteJob(job.id)}
-                >
-                  Delete Job
+                <button className="btn-delete" onClick={() => handleDeleteJob(job.id)}>
+                  Delete
                 </button>
               </div>
             </div>
@@ -103,21 +105,37 @@ const CompanyJobs = () => {
             <label>Job Title</label>
             <input
               value={editingJob.title}
-              onChange={(e) =>
-                setEditingJob({ ...editingJob, title: e.target.value })
-              }
-              placeholder="e.g. Senior Frontend Developer"
+              onChange={(e) => setEditingJob({ ...editingJob, title: e.target.value })}
             />
           </div>
 
+          <div className="form-row">
+            <div className="form-group">
+              <label>Location</label>
+              <input
+                value={editingJob.location}
+                onChange={(e) => setEditingJob({ ...editingJob, location: e.target.value })}
+              />
+            </div>
+            <div className="form-group">
+              <label>Job Type</label>
+              <select
+                value={editingJob.jobType}
+                onChange={(e) => setEditingJob({ ...editingJob, jobType: e.target.value })}
+              >
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+              </select>
+            </div>
+          </div>
+
           <div className="form-group">
-            <label>Company Name</label>
+            <label>Salary Range</label>
             <input
-              value={editingJob.company}
-              onChange={(e) =>
-                setEditingJob({ ...editingJob, company: e.target.value })
-              }
-              placeholder="Company Name"
+              value={editingJob.salary}
+              onChange={(e) => setEditingJob({ ...editingJob, salary: e.target.value })}
             />
           </div>
 
@@ -125,17 +143,14 @@ const CompanyJobs = () => {
             <label>Description</label>
             <textarea
               value={editingJob.description}
-              onChange={(e) =>
-                setEditingJob({ ...editingJob, description: e.target.value })
-              }
-              placeholder="Job description..."
-              rows="6"
+              onChange={(e) => setEditingJob({ ...editingJob, description: e.target.value })}
+              rows="4"
             />
           </div>
 
           <div className="modal-actions">
             <button className="btn-save" onClick={handleSaveEdit}>
-              Save Changes
+              Update Posting
             </button>
           </div>
         </div>

@@ -7,7 +7,6 @@ const Favorites = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -20,45 +19,51 @@ const Favorites = () => {
         setIsLoading(false);
       }
     };
-
     fetchFavorites();
   }, []);
 
   const deleteFavorite = async (jobId) => {
     try {
       await removeFavorite(jobId); 
-
       setFavoriteJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobId));
-      
-      alert("Removed from favorites");
     } catch (err) {
       alert("Could not remove the job. Please try again.");
     }
   };
 
-  if (isLoading) return <div className="loader">Loading favorites...</div>;
+  if (isLoading) return <div className="loader">Loading your favorites...</div>;
   if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="favorites-container">
-      <h2 className="favorites-title">Your Favorite Jobs</h2>
+      <h2 className="favorites-title">Your Saved Jobs</h2>
 
-      <div className="jobs-list">
+      <div className="fav-jobs-grid">
         {favoriteJobs.length === 0 ? (
-          <p className="no-favorites">You haven't saved any jobs yet.</p>
+          <div className="empty-favorites">
+            <p>You haven't saved any jobs yet.</p>
+          </div>
         ) : (
           favoriteJobs.map((job) => (
-            <div key={job.id} className="job-card">
+            <div key={job.id} className="fav-job-card">
+              <div className="fav-card-header">
+                <span className="fav-type-tag">{job.jobType}</span>
+                <button 
+                  className="btn-remove-fav"
+                  onClick={() => deleteFavorite(job.id)}
+                  title="Remove from favorites"
+                >
+                  ✕
+                </button>
+              </div>
+
               <h3>{job.title}</h3>
-              <p className="company-name"><strong>Company:</strong> {job.company}</p>
-              <p className="job-description">{job.description}</p>
+              <p className="fav-company"><strong>{job.company}</strong></p>
+              <p className="fav-location">📍 {job.location}</p>
               
-              <button
-                className="delete-btn"
-                onClick={() => deleteFavorite(job.id)}
-              >
-                Remove
-              </button>
+              <div className="fav-footer">
+                <span className="fav-salary">{job.salary}</span>
+              </div>
             </div>
           ))
         )}

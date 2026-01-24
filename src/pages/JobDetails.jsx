@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getJobById} from "../services/jobsService";
+import { getJobById } from "../services/jobsService";
 import "./JobDetails.css"; 
 
 const JobDetails = () => {
@@ -9,33 +9,47 @@ const JobDetails = () => {
   const [job, setJob] = useState(null);
 
   useEffect(() => {
-  const fetchJob = async () => {
-    try {
-      const jobData = await getJobById(id);
+    const fetchJob = async () => {
+      try {
+        const jobData = await getJobById(id);
         setJob(jobData);
       } catch (error) {
         console.error("Failed to fetch job details:", error);
       }
     };
-
     fetchJob();
   }, [id]);
 
-  if (!job) return <p className="error-message">Job not found!</p>;
+  if (!job) return <div className="loading-container">Loading job details...</div>;
 
   return (
     <div className="job-details-container">
       <button className="back-button" onClick={() => navigate("/jobs")}>
-        ← Back to Jobs
+        ← Back to Search
       </button>
       
-      <div className="job-card">
-        <h1 className="job-title">{job.title}</h1>
-        <h3 className="company-name">{job.company}</h3>
+      <div className="job-detail-card">
+        <header className="detail-header">
+          <div className="header-top">
+            <span className="job-badge">{job.jobType}</span>
+            {job.salary && <span className="salary-badge">{job.salary}</span>}
+          </div>
+          <h1 className="job-title">{job.title}</h1>
+          <h3 className="company-name">{job.company}</h3>
+          <p className="location-info">📍 {job.location}</p>
+        </header>
         
-        <div className="description-section">
-          <h4>Job Description</h4>
-          <p className="description-text">{job.description}</p>
+        <div className="detail-body">
+          <section className="description-section">
+            <h4>About the Role</h4>
+            <p className="description-text">{job.description}</p>
+          </section>
+          
+          <div className="apply-section">
+            <button className="btn-apply-now" onClick={() => alert("Application process started!")}>
+              Apply for this Position
+            </button>
+          </div>
         </div>
       </div>
     </div>
