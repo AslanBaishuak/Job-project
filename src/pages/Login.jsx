@@ -17,9 +17,9 @@ const Login = () => {
     try {
       const loginData = await loginUser(email, password);
 
-      // 1. Save the token
       localStorage.setItem("token", loginData.accessToken);
-      localStorage.setItem("role", loginData.user.role)
+      localStorage.setItem("role", loginData.user.role);
+      localStorage.setItem('userGmail', loginData.user.email);
 
       console.log("Login successful:", loginData);
 

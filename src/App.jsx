@@ -9,7 +9,7 @@ import JobDetails from "./pages/JobDetails";
 import Favorites from "./pages/Favorites";
 import CompanyJobs from "./pages/CompanyJobs";
 import Navbar from "./components/NavBar";
-
+import EmployerApplications from "./pages/EmployerApplications";
 
 export default function App() {
 
@@ -26,6 +26,7 @@ export default function App() {
         <Route path="/jobs/:id" element={<JobDetails />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<h1>404</h1>}/>
+        <Route path="/employer-applications" element={<EmployerApplications />} />
         <Route path="/company-jobs" element={<CompanyJobs />} />
       </Routes>
     </BrowserRouter>

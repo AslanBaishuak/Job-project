@@ -1,5 +1,36 @@
 {
-  "jobs": [],
+  "jobs": [
+    {
+      "id": 1769250622664,
+      "title": "Engineer",
+      "company": "SpaceX",
+      "description": "Work in a place where personality matters",
+      "location": "Washington",
+      "jobType": "Full-time",
+      "salary": "1000-2000",
+      "postedAt": "2026-01-24T10:30:22.664Z"
+    },
+    {
+      "id": 1769250694783,
+      "title": "Computer scientist ",
+      "company": "Google",
+      "description": "Work in the best place in the world",
+      "location": "New York",
+      "jobType": "Contract",
+      "salary": "5555-9999",
+      "postedAt": "2026-01-24T10:31:34.783Z"
+    },
+    {
+      "id": 1769250768453,
+      "title": "Frontender",
+      "company": "Microsoft",
+      "description": "The best part-time job ",
+      "location": "Los Angeles",
+      "jobType": "Part-time",
+      "salary": "500-600",
+      "postedAt": "2026-01-24T10:32:48.453Z"
+    }
+  ],
   "users": [
     {
       "email": "asasas@hjsahjs.com",
@@ -58,5 +89,6 @@
       "id": 8
     }
   ],
-  "favorites": []
+  "favorites": [],
+  "appliedJobs": []
 }
