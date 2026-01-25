@@ -194,3 +194,69 @@
   border-radius: 12px;
   border: 2px dashed #dfe6e9;
 }
+
+@media screen and (max-width: 900px) {
+  .company-jobs-container {
+    max-width: 100%;
+    margin: 30px auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .company-jobs-container {
+    padding: 0 15px;
+    margin: 20px auto;
+  }
+
+  .company-jobs-container h2 {
+    font-size: 1.5rem;
+    text-align: center; 
+    margin-bottom: 20px;
+  }
+
+
+  .company-job-card {
+    padding: 16px; 
+  }
+
+  .company-job-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .card-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .company-button-group {
+    flex-direction: column; 
+    width: 100%;
+  }
+
+  .btn-edit, .btn-delete {
+    width: 100%;          
+    text-align: center;   
+    padding: 12px;        
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; 
+    gap: 12px;
+  }
+
+  .modal-form {
+    padding: 0; 
+  }
+  
+  .modal-form input, 
+  .modal-form select, 
+  .modal-form textarea {
+    font-size: 16px; 
+  }
+
+  .btn-save {
+    margin-top: 10px;
+  }
+}

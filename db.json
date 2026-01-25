@@ -90,5 +90,16 @@
     }
   ],
   "favorites": [],
-  "appliedJobs": []
+  "appliedJobs": [
+    {
+      "userGmail": "b@gmail.com",
+      "jobId": 1769250622664,
+      "jobTitle": "Engineer",
+      "company": "SpaceX",
+      "location": "Washington",
+      "status": "Rejected",
+      "appliedAt": "2026-01-25T07:34:12.863Z",
+      "id": 1
+    }
+  ]
 }

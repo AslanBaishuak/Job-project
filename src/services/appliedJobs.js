@@ -1,6 +1,5 @@
 import { BASE_URL } from "./api";
 
-// Fetch all applications
 export const getApplications = async () => {
     const res = await fetch(BASE_URL + "/appliedJobs", {
         method: "GET", 
@@ -14,7 +13,6 @@ export const getApplications = async () => {
     return res.json();
 }
 
-// Apply to a new job
 export const applyToJob = async (applicationData) => {
     const res = await fetch(BASE_URL + "/appliedJobs", {
         method: "POST", 
@@ -26,10 +24,9 @@ export const applyToJob = async (applicationData) => {
     return res.json();
 }
 
-// NEW: Update status (Accept/Reject)
 export const updateApplicationStatus = async (id, status) => {
     const res = await fetch(`${BASE_URL}/appliedJobs/${id}`, {
-        method: "PATCH", // PATCH updates only the specific fields (status)
+        method: "PATCH", 
         headers: {
             "Content-Type": "application/json",
         },

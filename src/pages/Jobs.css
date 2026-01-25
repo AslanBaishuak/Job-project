@@ -237,3 +237,64 @@ h1 {
   margin-top: 40px;
 }
 
+@media screen and (max-width: 900px) {
+  .jobs-container {
+    max-width: 100%;
+    padding: 30px 15px;
+  }
+  
+  .job-grid {
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .filter-bar {
+    flex-direction: column; 
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .search-input, 
+  .filter-select {
+    width: 100%;    
+    min-width: 0;   
+    flex: none;     
+  }
+
+  .job-grid {
+    grid-template-columns: 1fr; 
+    gap: 16px;
+  }
+
+  .job-card {
+    max-width: 100%; 
+    padding: 16px;  
+  }
+
+  .job-card:hover {
+ 
+    transform: none; 
+  }
+
+  .job-card-header {
+    flex-wrap: wrap; 
+    gap: 10px;
+  }
+  
+  .job-link h3 {
+    font-size: 1.15rem;
+  }
+
+  .results-count {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
