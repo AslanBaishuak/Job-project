@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getJobById } from "../services/jobsService";
-import { applyToJob , getApplications} from "../services/appliedJobs";
+import { applyToJob, getApplications } from "../services/appliedJobs";
+import Modal from "../components/Modal";
 import "./JobDetails.css";
 
 const JobDetails = () => {
@@ -9,6 +10,11 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [isApplying, setIsApplying] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [cvText, setCvText] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -22,36 +28,59 @@ const JobDetails = () => {
     fetchJob();
   }, [id]);
 
-  const handleApply = async () => {
+  const handleApplyClick = async () => {
     const currentUserGmail = localStorage.getItem("userGmail");
-
     if (!currentUserGmail) {
-        alert("Please log in to apply");
-        return;
+      alert("Please log in to apply");
+      return;
     }
-
-    setIsApplying(true);
-
-    const applicationData = {
-      userGmail: currentUserGmail,
-      jobId: job.id,
-      jobTitle: job.title,
-      company: job.company,
-      location: job.location, 
-      status: "pending",
-      appliedAt: new Date().toISOString(),
-    };
 
     try {
       const res = await getApplications();
-      const data = res.filter((job) => job.jobId === applicationData.jobId && job.userGmail === applicationData.userGmail);
-      console.log(data);
-      if (data.length !== 0 ) {
-        alert("you already applied");
+      const alreadyApplied = res.find(
+        (app) => app.jobId === job.id && app.userGmail === currentUserGmail
+      );
+
+      if (alreadyApplied) {
+        alert("You have already applied for this job.");
         return;
       }
+
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("Error checking applications", error);
+    }
+  };
+
+  const submitApplication = async () => {
+    if (!cvText.trim() || !fullName.trim() || !phone.trim()) {
+      alert("Please fill in all fields (Name, Phone, and CV) before submitting.");
+      return;
+    }
+
+    setIsApplying(true);
+    const currentUserGmail = localStorage.getItem("userGmail");
+
+    const applicationData = {
+      userGmail: currentUserGmail,
+      fullName: fullName,
+      phone: phone,
+      jobId: job.id,
+      jobTitle: job.title,
+      company: job.company,
+      location: job.location,
+      status: "pending",
+      appliedAt: new Date().toISOString(),
+      cv: cvText,
+    };
+
+    try {
       await applyToJob(applicationData);
       alert("Success! Your application has been recorded.");
+      setIsModalOpen(false);
+      setCvText("");
+      setFullName("");
+      setPhone("");
     } catch (error) {
       console.error(error);
       alert("Submission failed.");
@@ -89,7 +118,7 @@ const JobDetails = () => {
           <div className="apply-section">
             <button
               className="btn-apply-now"
-              onClick={handleApply}
+              onClick={handleApplyClick}
               disabled={isApplying}
             >
               {isApplying ? "Submitting..." : "Apply for this Position"}
@@ -97,6 +126,57 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={`Apply for ${job.title}`}
+      >
+        <div className="modal-form">
+          <p className="modal-description">
+            Please provide your details below to complete your application.
+          </p>
+
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Full Name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+
+          <input
+            type="tel"
+            className="form-input"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+
+          <textarea
+            className="form-textarea"
+            value={cvText}
+            onChange={(e) => setCvText(e.target.value)}
+            placeholder="Paste your CV or cover letter here..."
+          />
+
+          <div className="modal-actions">
+            <button
+              className="btn-modal btn-cancel"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn-modal btn-submit"
+              onClick={submitApplication}
+              disabled={isApplying}
+            >
+              {isApplying ? "Sending..." : "Submit Application"}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

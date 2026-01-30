@@ -115,3 +115,82 @@
 .btn-apply-now:hover {
   background: #0056b3;
 }
+
+
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-description {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #0070f3;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+.form-textarea {
+  height: 150px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-modal {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-cancel {
+  background: #f1f3f5;
+  color: #495057;
+}
+
+.btn-cancel:hover {
+  background: #e9ecef;
+}
+
+.btn-submit {
+  background: #0070f3;
+  color: white;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.btn-submit:disabled {
+  background: #a0cbf5;
+  cursor: not-allowed;
+}

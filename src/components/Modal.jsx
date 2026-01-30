@@ -42,7 +42,7 @@ const modalStyle = {
   backgroundColor: "white",
   padding: "30px",
   borderRadius: "12px",
-  maxWidth: "800px", // Increased width
+  maxWidth: "800px",
   width: "90%",
   maxHeight: "85vh",
   overflowY: "auto",

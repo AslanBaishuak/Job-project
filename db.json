@@ -93,12 +93,15 @@
   "appliedJobs": [
     {
       "userGmail": "b@gmail.com",
+      "fullName": "Aslan Baishuak",
+      "phone": "+77716714272",
       "jobId": 1769250622664,
       "jobTitle": "Engineer",
       "company": "SpaceX",
       "location": "Washington",
-      "status": "Rejected",
-      "appliedAt": "2026-01-25T07:34:12.863Z",
+      "status": "Accepted",
+      "appliedAt": "2026-01-30T17:19:50.690Z",
+      "cv": "I am really talanted and I study at Harvard.",
       "id": 1
     }
   ]

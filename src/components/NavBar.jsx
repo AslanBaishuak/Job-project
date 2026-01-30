@@ -17,12 +17,10 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* Left side: Brand Logo */}
       <Link to="/" className="nav-brand">
         JobPortal
       </Link>
 
-      {/* Right side: Navigation Links & Buttons */}
       <div className="nav-links">
         {isSeeker && (
           <>

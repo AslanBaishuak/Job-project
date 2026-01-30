@@ -71,7 +71,6 @@ const Jobs = () => {
     <div className="jobs-container">
       <h1>Available Jobs</h1>
 
-      {/* Filter inputs */}
       <div className="filter-bar">
         <input
           className="search-input"
@@ -109,7 +108,6 @@ const Jobs = () => {
           {filteredJobs.map((job) => {
             const appStatus = getApplicationStatus(job.id);
 
-            // Determine CSS class based on status
             let statusClass = "status-pending";
             if (appStatus === "Accepted") statusClass = "status-accepted";
             if (appStatus === "Rejected") statusClass = "status-rejected";
@@ -136,12 +134,11 @@ const Jobs = () => {
                   {job.description?.substring(0, 100)}...
                 </p>
 
-                {/* Status Badge using clean CSS classes */}
                 {appStatus && (
                   <div
                     className="status-badge"
                     style={{
-                      /* ... keep your existing styles ... */
+                      
                       backgroundColor:
                         appStatus === "Accepted"
                           ? "#d1fae5"
@@ -164,7 +161,6 @@ const Jobs = () => {
                   >
                     {appStatus === "Accepted" && "🎉 Accepted"}
                     {appStatus === "Rejected" && "❌ Rejected"}
-                    {/* Fix: Display the actual status text if it's not Accepted/Rejected/Pending */}
                     {appStatus !== "Accepted" &&
                       appStatus !== "Rejected" &&
                       `⏳ ${appStatus === "Pending" ? "Application Sent" : appStatus}`}
