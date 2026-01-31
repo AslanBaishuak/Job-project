@@ -116,30 +116,26 @@
   background: #0056b3;
 }
 
-/* --- NEW STATUS BUTTON STYLES --- */
-
-/* Base style for all status buttons */
 .btn-status {
   cursor: default;
-  opacity: 1; /* Override any disabled opacity defaults if present */
+  opacity: 1;
   box-shadow: none;
 }
 
 .btn-status-pending {
-  background-color: #6c757d; /* Neutral Grey */
+  background-color: #6c757d;
   color: #ffffff;
 }
 
 .btn-status-accepted {
-  background-color: #28a745; /* Green */
+  background-color: #28a745;
   color: #ffffff;
 }
 
 .btn-status-rejected {
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545;
   color: #ffffff;
 }
-/* -------------------------------- */
 
 .modal-form {
   display: flex;
