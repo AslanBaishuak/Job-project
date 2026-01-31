@@ -6,7 +6,7 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -15,7 +15,6 @@ h1 {
   font-size: 2rem;
   font-weight: 700;
 }
-
 
 .filter-bar {
   display: flex;
@@ -29,18 +28,20 @@ h1 {
   border: 1px solid #f0f0f0;
 }
 
-.search-input, .filter-select {
+.search-input,
+.filter-select {
   padding: 12px 15px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   font-size: 0.95rem;
   flex: 1;
-  min-width: 200px; 
+  min-width: 200px;
   transition: border-color 0.2s;
   background-color: #f9f9f9;
 }
 
-.search-input:focus, .filter-select:focus {
+.search-input:focus,
+.filter-select:focus {
   outline: none;
   border-color: #0984e3;
   background-color: #fff;
@@ -53,12 +54,11 @@ h1 {
   font-weight: 500;
 }
 
-
 .job-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .job-card {
@@ -68,12 +68,14 @@ h1 {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
-  max-width: 500px; 
+  max-width: 500px;
   width: 100%;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .job-card:hover {
@@ -147,9 +149,8 @@ h1 {
   color: #555;
   line-height: 1.6;
   margin-bottom: 20px;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
-
 
 .status-badge {
   margin-bottom: 16px;
@@ -183,9 +184,8 @@ h1 {
   border-color: #fbbf24;
 }
 
-
 .button-group {
-  margin-top: auto; 
+  margin-top: auto;
 }
 
 .btn-favorite {
@@ -211,7 +211,6 @@ h1 {
   border-color: #fdcb6e;
 }
 
-
 .btn-favorite.active {
   background-color: #fee2e2;
   color: #991b1b;
@@ -227,7 +226,6 @@ h1 {
 .btn-favorite:active {
   transform: scale(0.98);
 }
-
 
 .loader {
   text-align: center;
@@ -258,14 +256,13 @@ h1 {
     max-width: 100%;
     padding: 30px 15px;
   }
-  
+
   .job-grid {
     gap: 20px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  
   h1 {
     font-size: 1.75rem;
     margin-bottom: 20px;
@@ -273,38 +270,37 @@ h1 {
   }
 
   .filter-bar {
-    flex-direction: column; 
+    flex-direction: column;
     padding: 15px;
     gap: 10px;
   }
 
-  .search-input, 
+  .search-input,
   .filter-select {
-    width: 100%;    
-    min-width: 0;   
-    flex: none;     
+    width: 100%;
+    min-width: 0;
+    flex: none;
   }
 
   .job-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 
   .job-card {
-    max-width: 100%; 
-    padding: 16px;  
+    max-width: 100%;
+    padding: 16px;
   }
 
   .job-card:hover {
- 
-    transform: none; 
+    transform: none;
   }
 
   .job-card-header {
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: 10px;
   }
-  
+
   .job-link h3 {
     font-size: 1.15rem;
   }

@@ -1,13 +1,11 @@
-
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f4f7f6;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 .login-card {
   background: #ffffff;
@@ -25,7 +23,6 @@
   font-size: 24px;
 }
 
-
 .login-card input {
   width: 100%;
   padding: 12px 15px;
@@ -33,7 +30,7 @@
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   font-size: 16px;
   transition: border-color 0.3s ease;
 }
@@ -42,7 +39,6 @@
   outline: none;
   border-color: #007bff;
 }
-
 
 .login-card button {
   width: 100%;

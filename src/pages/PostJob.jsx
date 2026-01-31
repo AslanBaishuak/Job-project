@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createJob } from "../services/jobsService";
-import "./PostJob.css"; 
+import "./PostJob.css";
 
 const PostJob = () => {
   const [title, setTitle] = useState("");
@@ -10,15 +10,17 @@ const PostJob = () => {
   const [location, setLocation] = useState("");
   const [jobType, setJobType] = useState("Full-time");
   const [salary, setSalary] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (!title || !company || !location) {
-      return alert("Please fill in the required fields (Title, Company, Location)");
+      return alert(
+        "Please fill in the required fields (Title, Company, Location)",
+      );
     }
 
     const newJob = {
@@ -34,8 +36,8 @@ const PostJob = () => {
 
     try {
       setIsSubmitting(true);
-      await createJob(newJob); 
-      navigate("/company-jobs"); 
+      await createJob(newJob);
+      navigate("/company-jobs");
     } catch (error) {
       console.error("Failed to create job:", error);
       alert("Something went wrong. Please try again.");

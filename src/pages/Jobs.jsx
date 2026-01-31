@@ -12,7 +12,7 @@ import "./Jobs.css";
 const Jobs = () => {
   const [jobList, setJobList] = useState([]);
   const [userApplications, setUserApplications] = useState([]);
-  const [favorites, setFavorites] = useState([]); 
+  const [favorites, setFavorites] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All");
   const [filterLocation, setFilterLocation] = useState("");
@@ -60,7 +60,7 @@ const Jobs = () => {
       alert(
         isFavorite
           ? "Failed to remove job from favorites."
-          : "Failed to add job to favorites."
+          : "Failed to add job to favorites.",
       );
     }
   };
@@ -164,20 +164,20 @@ const Jobs = () => {
                         appStatus === "Accepted"
                           ? "#d1fae5"
                           : appStatus === "Rejected"
-                          ? "#fee2e2"
-                          : "#fef3c7",
+                            ? "#fee2e2"
+                            : "#fef3c7",
                       color:
                         appStatus === "Accepted"
                           ? "#065f46"
                           : appStatus === "Rejected"
-                          ? "#991b1b"
-                          : "#92400e",
+                            ? "#991b1b"
+                            : "#92400e",
                       borderColor:
                         appStatus === "Accepted"
                           ? "#34d399"
                           : appStatus === "Rejected"
-                          ? "#f87171"
-                          : "#fbbf24",
+                            ? "#f87171"
+                            : "#fbbf24",
                     }}
                   >
                     {appStatus === "Accepted" && "🎉 Accepted"}

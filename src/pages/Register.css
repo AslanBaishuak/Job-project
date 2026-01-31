@@ -1,13 +1,11 @@
-
 .register-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #f4f7f6;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 .register-card {
   background: #ffffff;
@@ -25,8 +23,7 @@
   font-size: 24px;
 }
 
-
-.register-card input, 
+.register-card input,
 .register-card select {
   width: 100%;
   padding: 12px 15px;
@@ -40,13 +37,11 @@
   transition: border-color 0.3s ease;
 }
 
-
 .register-card input:focus,
 .register-card select:focus {
   outline: none;
   border-color: #007bff;
 }
-
 
 .register-card button {
   width: 100%;

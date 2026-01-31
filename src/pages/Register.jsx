@@ -7,10 +7,9 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
   const validateForm = () => {
-
     if (!name.trim()) {
       setError("Name is required.");
       return false;
@@ -24,12 +23,12 @@ const Register = () => {
       return false;
     }
 
-    setError(""); 
+    setError("");
     return true;
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (validateForm()) {
       try {
@@ -57,7 +56,7 @@ const Register = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          
+
           <input
             placeholder="Email"
             type="email"

@@ -6,7 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email === "" || password === "") {
@@ -19,11 +19,11 @@ const Login = () => {
 
       localStorage.setItem("token", loginData.accessToken);
       localStorage.setItem("role", loginData.user.role);
-      localStorage.setItem('userGmail', loginData.user.email);
+      localStorage.setItem("userGmail", loginData.user.email);
 
       console.log("Login successful:", loginData);
 
-      window.location.replace("/")
+      window.location.replace("/");
     } catch (error) {
       console.log("Login failed", error);
       alert("Invalid credentials. Please try again.");
@@ -33,7 +33,7 @@ const Login = () => {
     <div className="login-wrapper">
       <div className="login-card">
         <h2>Login</h2>
-        <form action="" onSubmit={handleSubmit}> 
+        <form action="" onSubmit={handleSubmit}>
           <input
             placeholder="Email"
             type="email"
