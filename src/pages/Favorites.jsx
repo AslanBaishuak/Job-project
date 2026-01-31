@@ -24,7 +24,7 @@ const Favorites = () => {
 
   const deleteFavorite = async (jobId) => {
     try {
-      await removeFavorite(jobId); 
+      await removeFavorite(jobId);
       setFavoriteJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobId));
     } catch (err) {
       alert("Could not remove the job. Please try again.");
@@ -48,7 +48,7 @@ const Favorites = () => {
             <div key={job.id} className="fav-job-card">
               <div className="fav-card-header">
                 <span className="fav-type-tag">{job.jobType}</span>
-                <button 
+                <button
                   className="btn-remove-fav"
                   onClick={() => deleteFavorite(job.id)}
                   title="Remove from favorites"
@@ -58,9 +58,11 @@ const Favorites = () => {
               </div>
 
               <h3>{job.title}</h3>
-              <p className="fav-company"><strong>{job.company}</strong></p>
+              <p className="fav-company">
+                <strong>{job.company}</strong>
+              </p>
               <p className="fav-location">📍 {job.location}</p>
-              
+
               <div className="fav-footer">
                 <span className="fav-salary">{job.salary}</span>
               </div>

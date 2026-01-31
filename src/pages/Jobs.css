@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 
 .jobs-container {
   max-width: 1000px;
@@ -68,7 +71,7 @@ h1 {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
-  max-width: 450px; 
+  max-width: 500px; 
   width: 100%;
   margin: 0 auto; 
 }
@@ -206,6 +209,19 @@ h1 {
   background: #ffeaa7;
   color: #d35400;
   border-color: #fdcb6e;
+}
+
+
+.btn-favorite.active {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-color: #f87171;
+}
+
+.btn-favorite.active:hover {
+  background-color: #fecaca;
+  color: #7f1d1d;
+  border-color: #ef4444;
 }
 
 .btn-favorite:active {

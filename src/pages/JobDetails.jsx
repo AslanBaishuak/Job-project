@@ -12,6 +12,8 @@ const JobDetails = () => {
   const [isApplying, setIsApplying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [existingApplication, setExistingApplication] = useState(null);
+
   const [cvText, setCvText] = useState("");
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -28,33 +30,49 @@ const JobDetails = () => {
     fetchJob();
   }, [id]);
 
-  const handleApplyClick = async () => {
+  useEffect(() => {
+    const checkApplicationStatus = async () => {
+      const currentUserGmail = localStorage.getItem("userGmail");
+      if (!currentUserGmail) return;
+
+      try {
+        const res = await getApplications();
+
+        const application = res.find(
+          (app) => app.jobId == id && app.userGmail === currentUserGmail,
+        );
+
+        if (application) {
+          setExistingApplication(application);
+        }
+      } catch (error) {
+        console.error("Error checking application status:", error);
+      }
+    };
+
+    checkApplicationStatus();
+  }, [id]);
+
+  const handleApplyClick = () => {
     const currentUserGmail = localStorage.getItem("userGmail");
     if (!currentUserGmail) {
       alert("Please log in to apply");
       return;
     }
 
-    try {
-      const res = await getApplications();
-      const alreadyApplied = res.find(
-        (app) => app.jobId === job.id && app.userGmail === currentUserGmail
-      );
-
-      if (alreadyApplied) {
-        alert("You have already applied for this job.");
-        return;
-      }
-
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error("Error checking applications", error);
+    if (existingApplication) {
+      alert("You have already applied for this job.");
+      return;
     }
+
+    setIsModalOpen(true);
   };
 
   const submitApplication = async () => {
     if (!cvText.trim() || !fullName.trim() || !phone.trim()) {
-      alert("Please fill in all fields (Name, Phone, and CV) before submitting.");
+      alert(
+        "Please fill in all fields (Name, Phone, and CV) before submitting.",
+      );
       return;
     }
 
@@ -69,14 +87,17 @@ const JobDetails = () => {
       jobTitle: job.title,
       company: job.company,
       location: job.location,
-      status: "pending",
+      status: "Pending",
       appliedAt: new Date().toISOString(),
       cv: cvText,
     };
 
     try {
-      await applyToJob(applicationData);
+      const savedApp = await applyToJob(applicationData);
       alert("Success! Your application has been recorded.");
+
+      setExistingApplication(savedApp);
+
       setIsModalOpen(false);
       setCvText("");
       setFullName("");
@@ -116,13 +137,28 @@ const JobDetails = () => {
           </section>
 
           <div className="apply-section">
-            <button
-              className="btn-apply-now"
-              onClick={handleApplyClick}
-              disabled={isApplying}
-            >
-              {isApplying ? "Submitting..." : "Apply for this Position"}
-            </button>
+            {existingApplication ? (
+              <button
+                className={`btn-apply-now btn-status ${
+                  existingApplication.status === "Accepted"
+                    ? "btn-status-accepted"
+                    : existingApplication.status === "Rejected"
+                      ? "btn-status-rejected"
+                      : "btn-status-pending"
+                }`}
+                disabled
+              >
+                Status: {existingApplication.status}
+              </button>
+            ) : (
+              <button
+                className="btn-apply-now"
+                onClick={handleApplyClick}
+                disabled={isApplying}
+              >
+                {isApplying ? "Submitting..." : "Apply for this Position"}
+              </button>
+            )}
           </div>
         </div>
       </div>

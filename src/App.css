@@ -102,3 +102,79 @@ body {
   max-width: 600px;
   margin: 0 auto;
 }
+
+
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #2c3e50;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+
+.menu-icon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-icon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem; 
+  }
+
+  .menu-icon {
+    display: flex; 
+  }
+
+  .nav-links {
+    display: none; 
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    flex-direction: column; 
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+
+ 
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-item {
+    margin: 15px 0; 
+    font-size: 1.1rem;
+    display: block;
+  }
+
+  
+  .nav-btn {
+    display: inline-block;
+    margin: 10px 5px;
+    width: 80%; 
+  }
+  
+  .hero-title {
+    font-size: 2rem; 
+  }
+}

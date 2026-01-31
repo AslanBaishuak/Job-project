@@ -4,8 +4,10 @@
   margin: 0 auto;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   margin-top: 2rem;
+  width: 95%;
+  padding: 1.5rem;
 }
 
 .page-title {
@@ -55,12 +57,10 @@
   background-color: #fff3cd;
   color: #856404;
 }
-
 .status-badge.accepted {
   background-color: #d4edda;
   color: #155724;
 }
-
 .status-badge.rejected {
   background-color: #f8d7da;
   color: #721c24;
@@ -68,46 +68,126 @@
 
 .action-buttons {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .action-btn {
-  padding: 6px 12px;
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: opacity 0.2s, background-color 0.2s;
-  color: white; 
+  transition:
+    opacity 0.2s,
+    background-color 0.2s;
+  color: white;
 }
 
 .action-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-
 .btn-view {
-  background-color: #17a2b8; 
+  background-color: #17a2b8;
 }
-
 .btn-view:hover:not(:disabled) {
   background-color: #138496;
 }
-
-
 .btn-accept {
   background-color: #28a745;
 }
-
 .btn-accept:hover:not(:disabled) {
   background-color: #218838;
 }
-
 .btn-reject {
   background-color: #dc3545;
 }
-
 .btn-reject:hover:not(:disabled) {
   background-color: #c82333;
+}
+
+@media screen and (max-width: 768px) {
+  .app-table thead {
+    display: none;
+  }
+
+  .app-table,
+  .app-table tbody,
+  .app-table tr,
+  .app-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .app-table tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    background: #fff;
+    padding: 10px;
+  }
+
+  .app-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+  }
+
+  .app-table td:last-child {
+    border-bottom: none;
+    display: block;
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  .app-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #666;
+    text-align: left;
+    margin-right: 15px;
+  }
+
+  .app-table td:nth-of-type(1)::before {
+    content: "Applicant";
+  }
+  .app-table td:nth-of-type(2)::before {
+    content: "Job Title";
+  }
+  .app-table td:nth-of-type(3)::before {
+    content: "Company";
+  }
+  .app-table td:nth-of-type(4)::before {
+    content: "Status";
+  }
+
+  .app-table td:nth-of-type(1) {
+    background-color: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .app-table td:nth-of-type(1)::before {
+    display: none;
+  }
+
+  .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .btn-view {
+    grid-column: span 2;
+    margin-bottom: 5px;
+  }
 }

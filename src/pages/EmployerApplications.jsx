@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getApplications, updateApplicationStatus } from "../services/appliedJobs";
+import {
+  getApplications,
+  updateApplicationStatus,
+} from "../services/appliedJobs";
 import Modal from "../components/Modal";
-import "./EmployerApplication.css"; 
+import "./EmployerApplication.css";
 
 const EmployerApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -14,9 +17,9 @@ const EmployerApplications = () => {
     const fetchApps = async () => {
       try {
         const data = await getApplications();
-        const normalizedData = data.map(app => ({
+        const normalizedData = data.map((app) => ({
           ...app,
-          status: app.status || "Pending"
+          status: app.status || "Pending",
         }));
         setApplications(normalizedData);
       } catch (error) {
@@ -29,7 +32,7 @@ const EmployerApplications = () => {
   }, []);
 
   const handleViewCv = (application) => {
-    console.log("Opening CV for:", application.userGmail); 
+    console.log("Opening CV for:", application.userGmail);
     setSelectedApp(application);
     setIsModalOpen(true);
   };
@@ -42,11 +45,11 @@ const EmployerApplications = () => {
   const handleStatusUpdate = async (appId, newStatus) => {
     try {
       await updateApplicationStatus(appId, newStatus);
-      
+
       setApplications((prevApps) =>
         prevApps.map((app) =>
-          app.id === appId ? { ...app, status: newStatus } : app
-        )
+          app.id === appId ? { ...app, status: newStatus } : app,
+        ),
       );
     } catch (error) {
       console.error("Failed to update status", error);
@@ -54,16 +57,17 @@ const EmployerApplications = () => {
     }
   };
 
-  if (loading) return <div className="employer-container">Loading applications...</div>;
+  if (loading)
+    return <div className="employer-container">Loading applications...</div>;
 
   return (
     <div className="employer-container">
       <h2 className="page-title">Received Applications</h2>
-      
+
       <table className="app-table">
         <thead>
           <tr>
-            <th>Applicant</th> 
+            <th>Applicant</th>
             <th>Job Title</th>
             <th>Company</th>
             <th>Status</th>
@@ -77,7 +81,9 @@ const EmployerApplications = () => {
                 {app.fullName ? (
                   <div>
                     <div style={{ fontWeight: "bold" }}>{app.fullName}</div>
-                    <div style={{ fontSize: "0.85rem", color: "#666" }}>{app.userGmail}</div>
+                    <div style={{ fontSize: "0.85rem", color: "#666" }}>
+                      {app.userGmail}
+                    </div>
                   </div>
                 ) : (
                   app.userGmail
@@ -85,7 +91,7 @@ const EmployerApplications = () => {
               </td>
               <td>{app.jobTitle}</td>
               <td>{app.company}</td>
-            
+
               <td>
                 <span className={`status-badge ${app.status.toLowerCase()}`}>
                   {app.status}
@@ -128,40 +134,67 @@ const EmployerApplications = () => {
       >
         {selectedApp ? (
           <div>
-            <div style={{ marginBottom: "20px", borderBottom: "1px solid #eee", paddingBottom: "10px" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+            <div
+              style={{
+                marginBottom: "20px",
+                borderBottom: "1px solid #eee",
+                paddingBottom: "10px",
+              }}
+            >
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "10px",
+                }}
+              >
                 <div>
-                  <p><strong>Name:</strong> {selectedApp.fullName || "N/A"}</p>
-                  <p><strong>Email:</strong> {selectedApp.userGmail}</p>
-                  <p><strong>Phone:</strong> {selectedApp.phone || "N/A"}</p>
+                  <p>
+                    <strong>Name:</strong> {selectedApp.fullName || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {selectedApp.userGmail}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {selectedApp.phone || "N/A"}
+                  </p>
                 </div>
                 <div style={{ textAlign: "right", color: "#555" }}>
-                  <p><strong>Job:</strong> {selectedApp.jobTitle}</p>
-                  <p><strong>Applied:</strong> {selectedApp.appliedAt ? new Date(selectedApp.appliedAt).toLocaleDateString() : "N/A"}</p>
+                  <p>
+                    <strong>Job:</strong> {selectedApp.jobTitle}
+                  </p>
+                  <p>
+                    <strong>Applied:</strong>{" "}
+                    {selectedApp.appliedAt
+                      ? new Date(selectedApp.appliedAt).toLocaleDateString()
+                      : "N/A"}
+                  </p>
                 </div>
               </div>
             </div>
-            
+
             <h3>CV / Cover Letter:</h3>
             <div
               style={{
                 backgroundColor: "#f8f9fa",
                 padding: "15px",
                 borderRadius: "8px",
-                whiteSpace: "pre-wrap", 
+                whiteSpace: "pre-wrap",
                 minHeight: "150px",
                 border: "1px solid #dee2e6",
                 maxHeight: "400px",
                 overflowY: "auto",
-                fontFamily: "monospace", 
-                fontSize: "14px"
+                fontFamily: "monospace",
+                fontSize: "14px",
               }}
             >
-              {selectedApp.cv ? selectedApp.cv : "No CV provided for this application."}
+              {selectedApp.cv
+                ? selectedApp.cv
+                : "No CV provided for this application."}
             </div>
-            
+
             <div style={{ marginTop: "20px", textAlign: "right" }}>
-              <button 
+              <button
                 onClick={closeModal}
                 style={{
                   padding: "8px 16px",
@@ -169,7 +202,7 @@ const EmployerApplications = () => {
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 Close

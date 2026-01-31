@@ -2,12 +2,17 @@ import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { getJobs } from "../services/jobsService";
 import { getApplications } from "../services/appliedJobs";
-import { addFavorite } from "../services/favoritesService";
+import {
+  getFavorite,
+  addFavorite,
+  removeFavorite,
+} from "../services/favoritesService";
 import "./Jobs.css";
 
 const Jobs = () => {
   const [jobList, setJobList] = useState([]);
   const [userApplications, setUserApplications] = useState([]);
+  const [favorites, setFavorites] = useState([]); 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("All");
   const [filterLocation, setFilterLocation] = useState("");
@@ -18,13 +23,15 @@ const Jobs = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const [jobsData, appsData] = await Promise.all([
+        const [jobsData, appsData, favsData] = await Promise.all([
           getJobs(),
           getApplications(),
+          getFavorite(),
         ]);
 
         setJobList(jobsData);
         setUserApplications(appsData);
+        setFavorites(favsData);
       } catch (err) {
         setError("Could not load jobs or application data.");
         console.error(err);
@@ -35,12 +42,26 @@ const Jobs = () => {
     fetchData();
   }, []);
 
-  const favoriteJob = async (job) => {
+  const handleToggleFavorite = async (job) => {
+    const isFavorite = favorites.some((fav) => fav.id === job.id);
+
     try {
-      await addFavorite(job);
-      alert("Job added to favorites!");
+      if (isFavorite) {
+        await removeFavorite(job.id);
+        setFavorites((prev) => prev.filter((fav) => fav.id !== job.id));
+        alert("Job removed from favorites.");
+      } else {
+        await addFavorite(job);
+        setFavorites((prev) => [...prev, job]);
+        alert("Job added to favorites!");
+      }
     } catch (err) {
-      alert("Failed to add job to favorites.");
+      console.error(err);
+      alert(
+        isFavorite
+          ? "Failed to remove job from favorites."
+          : "Failed to add job to favorites."
+      );
     }
   };
 
@@ -107,6 +128,7 @@ const Jobs = () => {
         <div className="job-grid">
           {filteredJobs.map((job) => {
             const appStatus = getApplicationStatus(job.id);
+            const isFav = favorites.some((fav) => fav.id === job.id);
 
             let statusClass = "status-pending";
             if (appStatus === "Accepted") statusClass = "status-accepted";
@@ -138,41 +160,43 @@ const Jobs = () => {
                   <div
                     className="status-badge"
                     style={{
-                      
                       backgroundColor:
                         appStatus === "Accepted"
                           ? "#d1fae5"
                           : appStatus === "Rejected"
-                            ? "#fee2e2"
-                            : "#fef3c7",
+                          ? "#fee2e2"
+                          : "#fef3c7",
                       color:
                         appStatus === "Accepted"
                           ? "#065f46"
                           : appStatus === "Rejected"
-                            ? "#991b1b"
-                            : "#92400e",
+                          ? "#991b1b"
+                          : "#92400e",
                       borderColor:
                         appStatus === "Accepted"
                           ? "#34d399"
                           : appStatus === "Rejected"
-                            ? "#f87171"
-                            : "#fbbf24",
+                          ? "#f87171"
+                          : "#fbbf24",
                     }}
                   >
                     {appStatus === "Accepted" && "🎉 Accepted"}
                     {appStatus === "Rejected" && "❌ Rejected"}
                     {appStatus !== "Accepted" &&
                       appStatus !== "Rejected" &&
-                      `⏳ ${appStatus === "Pending" ? "Application Sent" : appStatus}`}
+                      `⏳ ${
+                        appStatus === "Pending" ? "Application Sent" : appStatus
+                      }`}
                   </div>
                 )}
 
                 <div className="button-group">
                   <button
-                    className="btn-favorite"
-                    onClick={() => favoriteJob(job)}
+                    className={`btn-favorite ${isFav ? "active" : ""}`}
+                    onClick={() => handleToggleFavorite(job)}
                   >
-                    <span>♥</span> Add to Favorites
+                    <span>{isFav ? "💔" : "♥"}</span>{" "}
+                    {isFav ? "Delete from Favorites" : "Add to Favorites"}
                   </button>
                 </div>
               </div>

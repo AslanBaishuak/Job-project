@@ -1,9 +1,12 @@
-
 .company-jobs-container {
   max-width: 950px;
   margin: 40px auto;
   padding: 0 20px;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .company-jobs-container h2 {
@@ -13,7 +16,6 @@
   border-bottom: 2px solid #eee;
   padding-bottom: 10px;
 }
-
 
 .job-list {
   display: flex;
@@ -90,7 +92,8 @@
   padding-top: 18px;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit,
+.btn-delete {
   padding: 8px 20px;
   border-radius: 6px;
   font-weight: 600;
@@ -121,7 +124,6 @@
   color: #fff;
 }
 
-
 .modal-form {
   display: flex;
   flex-direction: column;
@@ -147,8 +149,8 @@
   color: #2d3436;
 }
 
-.modal-form input, 
-.modal-form select, 
+.modal-form input,
+.modal-form select,
 .modal-form textarea {
   padding: 10px 12px;
   border: 1px solid #dfe6e9;
@@ -158,8 +160,8 @@
   transition: border-color 0.2s;
 }
 
-.modal-form input:focus, 
-.modal-form select:focus, 
+.modal-form input:focus,
+.modal-form select:focus,
 .modal-form textarea:focus {
   border-color: #0070f3;
 }
@@ -185,7 +187,6 @@
   background: #0056b3;
 }
 
-
 .no-jobs-text {
   text-align: center;
   color: #b2bec3;
@@ -203,7 +204,6 @@
 }
 
 @media screen and (max-width: 600px) {
-
   .company-jobs-container {
     padding: 0 15px;
     margin: 20px auto;
@@ -211,13 +211,12 @@
 
   .company-jobs-container h2 {
     font-size: 1.5rem;
-    text-align: center; 
+    text-align: center;
     margin-bottom: 20px;
   }
 
-
   .company-job-card {
-    padding: 16px; 
+    padding: 16px;
   }
 
   .company-job-card h3 {
@@ -231,29 +230,30 @@
   }
 
   .company-button-group {
-    flex-direction: column; 
+    flex-direction: column;
     width: 100%;
   }
 
-  .btn-edit, .btn-delete {
-    width: 100%;          
-    text-align: center;   
-    padding: 12px;        
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
   }
 
   .form-row {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
   .modal-form {
-    padding: 0; 
+    padding: 0;
   }
-  
-  .modal-form input, 
-  .modal-form select, 
+
+  .modal-form input,
+  .modal-form select,
   .modal-form textarea {
-    font-size: 16px; 
+    font-size: 16px;
   }
 
   .btn-save {

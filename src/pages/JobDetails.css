@@ -23,7 +23,7 @@
 .job-detail-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   border: 1px solid #e1e8ed;
 }
@@ -116,7 +116,30 @@
   background: #0056b3;
 }
 
+/* --- NEW STATUS BUTTON STYLES --- */
 
+/* Base style for all status buttons */
+.btn-status {
+  cursor: default;
+  opacity: 1; /* Override any disabled opacity defaults if present */
+  box-shadow: none;
+}
+
+.btn-status-pending {
+  background-color: #6c757d; /* Neutral Grey */
+  color: #ffffff;
+}
+
+.btn-status-accepted {
+  background-color: #28a745; /* Green */
+  color: #ffffff;
+}
+
+.btn-status-rejected {
+  background-color: #dc3545; /* Red */
+  color: #ffffff;
+}
+/* -------------------------------- */
 
 .modal-form {
   display: flex;
@@ -139,7 +162,9 @@
   font-family: inherit;
   font-size: 0.95rem;
   box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .form-input:focus,
@@ -169,7 +194,9 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: background-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
 }
 
 .btn-cancel {
