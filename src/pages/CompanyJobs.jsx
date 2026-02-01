@@ -42,7 +42,7 @@ const CompanyJobs = () => {
     try {
       await updateJob(editingJob);
       setJobList(updatedJobs);
-      localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+      localStorage.setItem("jobs", JSON.stringify(updatedJobs)); // Remove unnused
       setIsModalOpen(false);
     } catch (err) {
       console.error("Failed to save job edits:", err);
@@ -58,7 +58,7 @@ const CompanyJobs = () => {
     try {
       await deleteJob(id);
       setJobList(updatedJobs);
-      localStorage.setItem("jobs", JSON.stringify(updatedJobs));
+      localStorage.setItem("jobs", JSON.stringify(updatedJobs)); // Remove unnused
     } catch (err) {
       console.error("Failed to delete job:", err);
     }

@@ -18,6 +18,7 @@ const Register = () => {
       setError("Password must be at least 5 characters long.");
       return false;
     }
+    // check if email is empty
     if (!role) {
       setError("Please select a role.");
       return false;
@@ -35,6 +36,7 @@ const Register = () => {
         const data = await registerUser(name, email, password, role);
         console.log("Registration successful:", data);
         alert("Account created successfully!");
+        // if success, go to login page
       } catch (error) {
         console.error("Registration error:", error);
         setError("Registration failed. Please try again.");
@@ -62,6 +64,7 @@ const Register = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <input
