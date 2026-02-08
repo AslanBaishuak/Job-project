@@ -13,6 +13,6 @@ export async function loginUser(email, password) {
   });
   if (!response.ok) {
     throw new Error("Login failed");
-  }
+  } 
   return response.json();
 }

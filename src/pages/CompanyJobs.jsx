@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../components/Modal";
 import { getJobs, deleteJob, updateJob } from "../services/jobsService";
+import { removeFavorite } from "../services/favoritesService";
 import "./CompanyJobs.css";
 
 const CompanyJobs = () => {
@@ -56,6 +57,8 @@ const CompanyJobs = () => {
     const updatedJobs = jobList.filter((job) => job.id !== id);
     try {
       await deleteJob(id);
+      await removeFavorite(id);
+
       setJobList(updatedJobs);
     } catch (err) {
       console.error("Failed to delete job:", err);
